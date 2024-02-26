@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Enmity Theme Editor</title>
+    <title>UI Editor</title>
 </head>
 <body>
     <div id="menu">
@@ -14,6 +14,10 @@
     <div id="OldEditor">
         <h2>Old UI</h2>
         <form id="uiForm" onsubmit="return false;">
+
+            <label for="HexBox">Hex:</label>
+            <input type="checkbox" id="HexBox" name="HexBox" onchange="hexBox()"><br><br>
+
             <label for="name">Theme Name:</label>
             <input type="text" id="name" name="name"><br><br>
             
@@ -185,6 +189,33 @@
     </div>
 
     <script>
+        var originalColors = {}; 
+        document.querySelectorAll('input[type="color"]').forEach(function(input) {
+            originalColors[input.id] = input.name;
+        });
+
+        function hexBox() {
+            var hexBox = document.getElementById("HexBox");
+            
+            if (hexBox.checked) {
+                for (var key in originalColors) {
+                    document.getElementById(key).type = 'text';
+                }
+            } else {
+                for (var key in originalColors) {
+                    document.getElementById(key).type = 'color';
+                }
+                setDefaultColors();
+            }
+        }  
+
+        function updateInputTypes() {
+            var inputs = document.querySelectorAll('input[type=""color""]');
+            inputs.forEach(function(input) {
+                input.type = "color";
+            });
+        }
+
         function showNewUI() {
             document.getElementById("NewEditor").style.display = "block";
             document.getElementById("OldEditor").style.display = "none";
