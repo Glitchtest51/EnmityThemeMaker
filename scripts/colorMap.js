@@ -106,13 +106,51 @@ function OldUIJSON() {
         }
     };
 
-    downloadJSOFile(jsonData, 'Theme.json')
+    downloadJSOFile(generateJsonData(), 'Theme.json');
 }
 
-// Download json data "JSON" with name "Name" 
-function downloadJSOFile(JSON, Name) {
+function generateJsonData() {
+    var jsonData = {
+        "name": value("name"),
+        "author": value("author"),
+        "version": value("version"),
+        "description": value("description"),
+        "authors": [{
+            "name": value("name"),
+            "id": value("id")
+        }],
+        "background": {
+            "blur": value("blur"),
+            "url": value("url"),
+            "alpha": value("alpha")
+        },
+        "theme_color_map": {},
+        "colours": {},
+        "unsafe_colors": {}
+    };
+
+    // Generate theme_color_map
+    colorMap.forEach(function (item) {
+        jsonData.theme_color_map[item] = [value("White" + item), value("Black" + item)];
+    });
+
+    // Generate colours
+    color.forEach(function (item) {
+        jsonData.colours[item] = value(item);
+    });
+
+    // Generate unsafe_colors
+    unsafe_color.forEach(function (item) {
+        jsonData.unsafe_colors[item] = value("UNSAFE_" + item);
+    });
+
+    return jsonData;
+}
+
+// Download json data "data" with name "Name" 
+function downloadJSOFile(data, Name) {
     const link = document.createElement('a');
-    link.href = URL.createObjectURL(new Blob([JSON.stringify(JSON, null, 2)], { type: 'application/json' }));
+    link.href = URL.createObjectURL(new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' }));
     link.download = Name;
     document.body.appendChild(link);
     link.click();
@@ -181,15 +219,15 @@ function generateColorInputs() {
         colordiv.appendChild(document.createElement("br"));
     }
 
-    for (var key in Unsafe_color) {
+    for (var key in unsafe_color) {
         var colorLabel = document.createElement("label");
-        colorLabel.setAttribute("for", "UNSAFE_" + Unsafe_color[key]);
-        colorLabel.textContent = "UNSAFE_" + Unsafe_color[key] + ":";
+        colorLabel.setAttribute("for", "UNSAFE_" + unsafe_color[key]);
+        colorLabel.textContent = "UNSAFE_" + unsafe_color[key] + ":";
 
         var colorInput = document.createElement("input");
         colorInput.setAttribute("type", "color");
-        colorInput.setAttribute("id", "UNSAFE_" + Unsafe_color[key]);
-        colorInput.setAttribute("name", "UNSAFE_" + Unsafe_color[key]);
+        colorInput.setAttribute("id", "UNSAFE_" + unsafe_color[key]);
+        colorInput.setAttribute("name", "UNSAFE_" + unsafe_color[key]);
 
         unsafecolordiv.appendChild(colorLabel);
         unsafecolordiv.appendChild(colorInput);
@@ -197,7 +235,6 @@ function generateColorInputs() {
         unsafecolordiv.appendChild(document.createElement("br"));
     }
 
-    setDefaultColors();
     Colors();
 }
 
@@ -251,7 +288,7 @@ var color = [
     "BRAND_NEW",
     "WHITE"
 ];
-var Unsafe_color = [
+var unsafe_color = [
     "CHAT_GREY"
 ];
 
