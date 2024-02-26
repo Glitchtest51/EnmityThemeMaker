@@ -6,7 +6,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>UI Editor</title>
-        <script src="scripts/colorMap.js"></script>
+        <script src="scripts/main.js"></script>
 
     </head>
 
@@ -20,6 +20,10 @@
         
         <!-- Old UI Editor -->
         <div id="OldEditor">
+
+            <!-- Script -->
+            <script src="scripts/OldUI.js"></script>
+
             <h2>Old UI</h2>
             <form id="uiForm" onsubmit="return false;">
 
@@ -44,14 +48,20 @@
 
                 <button onclick="OldUIJSON()">Go</button>
             </form>
+            
         </div>
 
         <!-- New UI Editor -->
         <div id="NewEditor" style="display: none;">
+
+            <!-- Script -->
+            <script src="scripts/OldUI.js"></script>
+
             <h2>New UI</h2>
             <form id="uiForm" onsubmit="return false;">
                 <h1>WIP</h1>
             </form>
+
         </div>
 
     </body>
