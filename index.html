@@ -1,345 +1,60 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>UI Editor</title>
-</head>
-<body>
-    <div id="menu">
-        <button onclick="showNewUI()">New UI</button>
-        <button onclick="showOldUI()">Old UI</button>
-    </div>
-    
-    <div id="OldEditor">
-        <h2>Old UI</h2>
-        <form id="uiForm" onsubmit="return false;">
 
-            <label for="HexBox">Hex:</label>
-            <input type="checkbox" id="HexBox" name="HexBox" onchange="hexBox()"><br><br>
+    <head>
 
-            <label for="name">Theme Name:</label>
-            <input type="text" id="name" name="name"><br><br>
-            
-            <label for="author">Author:</label>
-            <input type="text" id="author" name="author"><br><br>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>UI Editor</title>
+        <script src="scripts/colorMap.js"></script>
 
-            <label for="id">Author ID:</label>
-            <input type="text" id="id" name="id"><br><br>
+    </head>
 
-            <label for="version">Theme Version:</label>
-            <input type="text" id="version" name="version"><br><br>
+    <body>
 
-            <label for="description">Description:</label><br>
-            <textarea id="description" name="description"></textarea><br><br>
-
-            <label for="blur">Background Blur:</label>
-            <input type="text" id="blur" name="blur"><br><br>
-
-            <label for="url">Background URL:</label>
-            <input type="text" id="url" name="url"><br><br>
-
-            <label for="alpha">Background Alpha:</label>
-            <input type="text" id="alpha" name="alpha"><br><br>
-
-            <h3>Color Map (First is light mode and second is dark mode)</h3>
-
-            <div id="colorInputs"></div>
-
-            <h3>Colors</h3>
-
-            <label for="PRIMARY_DARK">PRIMARY_DARK:</label>
-            <input type="color" id="PRIMARY_DARK" name="PRIMARY_DARK"><br><br>
-            
-            <label for="PRIMARY_DARK_100">PRIMARY_DARK_100:</label>
-            <input type="color" id="PRIMARY_DARK_100" name="PRIMARY_DARK_100"><br><br>
-            
-            <label for="PRIMARY_DARK_300">PRIMARY_DARK_300:</label>
-            <input type="color" id="PRIMARY_DARK_300" name="PRIMARY_DARK_300"><br><br>
-            
-            <label for="PRIMARY_DARK_360">PRIMARY_DARK_360:</label>
-            <input type="color" id="PRIMARY_DARK_360" name="PRIMARY_DARK_360"><br><br>
-            
-            <label for="PRIMARY_DARK_400">PRIMARY_DARK_400:</label>
-            <input type="color" id="PRIMARY_DARK_400" name="PRIMARY_DARK_400"><br><br>
-            
-            <label for="PRIMARY_DARK_500">PRIMARY_DARK_500:</label>
-            <input type="color" id="PRIMARY_DARK_500" name="PRIMARY_DARK_500"><br><br>
-            
-            <label for="PRIMARY_DARK_600">PRIMARY_DARK_600:</label>
-            <input type="color" id="PRIMARY_DARK_600" name="PRIMARY_DARK_600"><br><br>
-            
-            <label for="PRIMARY_DARK_630">PRIMARY_DARK_630:</label>
-            <input type="color" id="PRIMARY_DARK_630" name="PRIMARY_DARK_630"><br><br>
-            
-            <label for="PRIMARY_DARK_700">PRIMARY_DARK_700:</label>
-            <input type="color" id="PRIMARY_DARK_700" name="PRIMARY_DARK_700"><br><br>
-            
-            <label for="PRIMARY_DARK_800">PRIMARY_DARK_800:</label>
-            <input type="color" id="PRIMARY_DARK_800" name="PRIMARY_DARK_800"><br><br>
-            
-            <label for="BRAND_NEW">BRAND_NEW:</label>
-            <input type="color" id="BRAND_NEW" name="BRAND_NEW"><br><br>
-            
-            <label for="WHITE">WHITE:</label>
-            <input type="color" id="WHITE" name="WHITE"><br><br>
-            
-            <h3>Unsafe Colors</h3>
-            
-            <label for="unsafeCHAT_GREY">unsafeCHAT_GREY:</label>
-            <input type="color" id="unsafeCHAT_GREY" name="unsafeCHAT_GREY"><br><br>
-
-            <button onclick="OldUIJSON()">Go</button>
-        </form>
-    </div>
-
-    <div id="NewEditor" style="display: none;">
-        <h2>New UI</h2>
-        <form id="uiForm" onsubmit="return false;">
-            <h1>WIP</h1>
-            
-            <button onclick="generateJSON()">Go</button>
-        </form>
-    </div>
-
-    <script>
-        var originalColors = {}; 
-        function Colors() {
-            document.querySelectorAll('input[type="color"]').forEach(function(input) {
-                originalColors[input.id] = input.name;
-            });
-        }
-
-        function hexBox() {
-            var hexBox = document.getElementById("HexBox");
-            
-            if (hexBox.checked) {
-                for (var key in originalColors) {
-                    document.getElementById(key).type = 'text';
-                }
-            } else {
-                for (var key in originalColors) {
-                    document.getElementById(key).type = 'color';
-                }
-                setDefaultColors();
-            }
-        }  
-
-        function showNewUI() {
-            document.getElementById("NewEditor").style.display = "block";
-            document.getElementById("OldEditor").style.display = "none";
-        }
+        <!-- menu -->
+        <div id="menu">
+            <button onclick="showNewUI()">New UI</button>
+            <button onclick="showOldUI()">Old UI</button>
+        </div>
         
-        function showOldUI() {
-            document.getElementById("NewEditor").style.display = "none";
-            document.getElementById("OldEditor").style.display = "block";
-        }
+        <!-- Old UI Editor -->
+        <div id="OldEditor">
+            <h2>Old UI</h2>
+            <form id="uiForm" onsubmit="return false;">
 
-        function value(id) {
-            var element = document.getElementById(id);
-            if (element) {
-                return element.value;
-            } else {
-                return '';
-            }
-        }
+                <!-- Colot input text field or color picker -->
+                <label for="HexBox">Hex:</label>
+                <input type="checkbox" id="HexBox" name="HexBox" onchange="hexBox()"><br><br>
 
-        
-        function OldUIJSON() {
-            var jsonData = {
-                "name": value("name"),
-                "author": value("author"),
-                "version": value("version"),
-                "description": value("description"),
-                "authors": [ 
-                    {
-                        "name": value("name"),
-                        "id": value("id")
-                    }
-                ],
-                "background": {
-                    "blur": value("blur"),
-                    "url": value("url"),
-                    "alpha": value("alpha")
-                },
-                "theme_color_map": {
-                    "KEYBOARD": [value("WhiteKEYBOARD"), value("BlackKEYBOARD")],
-                    "CHAT_GREY": [value("WhiteCHAT_GREY"), value("BlackCHAT_GREY")],
-                    "BACKGROUND_SECONDARY": [value("WhiteBACKGROUND_SECONDARY"), value("BlackBACKGROUND_SECONDARY")],
-                    "BACKGROUND_SECONDARY_ALT": [value("WhiteBACKGROUND_SECONDARY_ALT"), value("BlackBACKGROUND_SECONDARY_ALT")],
-                    "BACKGROUND_TERTIARY": [value("WhiteBACKGROUND_TERTIARY"), value("BlackBACKGROUND_TERTIARY")],
-                    "BACKGROUND_ACCENT": [value("WhiteBACKGROUND_ACCENT"), value("BlackBACKGROUND_ACCENT")],
-                    "BACKGROUND_FLOATING": [value("WhiteBACKGROUND_FLOATING"), value("BlackBACKGROUND_FLOATING")],
-                    "BACKGROUND_NESTED_FLOATING": [value("WhiteBACKGROUND_NESTED_FLOATING"), value("BlackBACKGROUND_NESTED_FLOATING")],
-                    "BACKGROUND_MOBILE_PRIMARY": [value("WhiteBACKGROUND_MOBILE_PRIMARY"), value("BlackBACKGROUND_MOBILE_PRIMARY")],
-                    "BACKGROUND_MOBILE_SECONDARY": [value("WhiteBACKGROUND_MOBILE_SECONDARY"), value("BlackBACKGROUND_MOBILE_SECONDARY")],
-                    "BACKGROUND_MODIFIER_ACCENT": [value("WhiteBACKGROUND_MODIFIER_ACCENT"), value("BlackBACKGROUND_MODIFIER_ACCENT")],
-                    "BACKGROUND_MODIFIER_ACTIVE": [value("WhiteBACKGROUND_MODIFIER_ACTIVE"), value("BlackBACKGROUND_MODIFIER_ACTIVE")],
-                    "BACKGROUND_MODIFIER_SELECTED": [value("WhiteBACKGROUND_MODIFIER_SELECTED"), value("BlackBACKGROUND_MODIFIER_SELECTED")],
-                    "CHANNELS_DEFAULT": [value("WhiteCHANNELS_DEFAULT"), value("BlackCHANNELS_DEFAULT")],
-                    "HEADER_PRIMARY": [value("WhiteHEADER_PRIMARY"), value("BlackHEADER_PRIMARY")],
-                    "HEADER_SECONDARY": [value("WhiteHEADER_SECONDARY"), value("BlackHEADER_SECONDARY")],
-                    "INTERACTIVE_ACTIVE": [value("WhiteINTERACTIVE_ACTIVE"), value("BlackINTERACTIVE_ACTIVE")],
-                    "INTERACTIVE_MUTED": [value("WhiteINTERACTIVE_MUTED"), value("BlackINTERACTIVE_MUTED")],
-                    "INTERACTIVE_NORMAL": [value("WhiteINTERACTIVE_NORMAL"), value("BlackINTERACTIVE_NORMAL")],
-                    "TEXT_LINK": [value("WhiteTEXT_LINK"), value("BlackTEXT_LINK")],
-                    "TEXT_MUTED": [value("WhiteTEXT_MUTED"), value("BlackTEXT_MUTED")],
-                    "TEXT_NORMAL": [value("WhiteTEXT_NORMAL"), value("BlackTEXT_NORMAL")]
-                },
-                "colours": {
-                    "PRIMARY_DARK": value("PRIMARY_DARK"),
-                    "PRIMARY_DARK_100": value("PRIMARY_DARK_100"),
-                    "PRIMARY_DARK_300": value("PRIMARY_DARK_300"),
-                    "PRIMARY_DARK_360": value("PRIMARY_DARK_360"),
-                    "PRIMARY_DARK_400": value("PRIMARY_DARK_400"),
-                    "PRIMARY_DARK_500": value("PRIMARY_DARK_500"),
-                    "PRIMARY_DARK_600": value("PRIMARY_DARK_600"),
-                    "PRIMARY_DARK_630": value("PRIMARY_DARK_630"),
-                    "PRIMARY_DARK_700": value("PRIMARY_DARK_700"),
-                    "PRIMARY_DARK_800": value("PRIMARY_DARK_800"),
-                    "BRAND_NEW": value("BRAND_NEW"),
-                    "WHITE": value("WHITE")
-                },
-                "unsafe_colors": {
-                    "CHAT_GREY": value("unsafeCHAT_GREY")
-                }
-            };
-        
-            const link = document.createElement('a');
-            link.href = URL.createObjectURL(new Blob([JSON.stringify(jsonData, null, 2)], { type: 'application/json' }));
-            link.download = 'Theme.json';
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
-            URL.revokeObjectURL(url);
-            console.log(jsonData);
-        }
+                <!-- Main Theme Data -->
+                <div id="main"></div>
+                
+                <!-- Color Maps -->
+                <h3>Color Map (First is light mode and second is dark mode)</h3>
+                <div id="ColorMaps"></div>
 
-        function setDefaultColors() {
-            var defaultColors = {
-                "version": "1.0.0",
-                "WhiteKEYBOARD": "#000000",
-                "BlackKEYBOARD": "#FFFFFF",
-                "WhiteBACKGROUND_PRIMARY": "#000000",
-                "BlackBACKGROUND_PRIMARY": "#FFFFFF",
-                "WhiteBACKGROUND_SECONDARY": "#000000",
-                "BlackBACKGROUND_SECONDARY": "#FFFFFF",
-                "WhiteBACKGROUND_SECONDARY_ALT": "#000000",
-                "BlackBACKGROUND_SECONDARY_ALT": "#FFFFFF",
-                "WhiteBACKGROUND_TERTIARY": "#000000",
-                "BlackBACKGROUND_TERTIARY": "#FFFFFF",
-                "WhiteBACKGROUND_ACCENT": "#000000",
-                "BlackBACKGROUND_ACCENT": "#FFFFFF",
-                "WhiteBACKGROUND_FLOATING": "#000000",
-                "BlackBACKGROUND_FLOATING": "#FFFFFF",
-                "WhiteBACKGROUND_NESTED_FLOATING": "#000000",
-                "BlackBACKGROUND_NESTED_FLOATING": "#FFFFFF",
-                "WhiteBACKGROUND_MOBILE_PRIMARY": "#000000",
-                "BlackBACKGROUND_MOBILE_PRIMARY": "#FFFFFF",
-                "WhiteBACKGROUND_MOBILE_SECONDARY": "#000000",
-                "BlackBACKGROUND_MOBILE_SECONDARY": "#FFFFFF",
-                "WhiteBACKGROUND_MODIFIER_ACCENT": "#000000",
-                "BlackBACKGROUND_MODIFIER_ACCENT": "#FFFFFF",
-                "WhiteBACKGROUND_MODIFIER_ACTIVE": "#000000",
-                "BlackBACKGROUND_MODIFIER_ACTIVE": "#FFFFFF",
-                "WhiteBACKGROUND_MODIFIER_SELECTED": "#000000",
-                "BlackBACKGROUND_MODIFIER_SELECTED": "#FFFFFF",
-                "WhiteCHANNELS_DEFAULT": "#000000",
-                "BlackCHANNELS_DEFAULT": "#FFFFFF",
-                "WhiteHEADER_PRIMARY": "#000000",
-                "BlackHEADER_PRIMARY": "#FFFFFF",
-                "WhiteHEADER_SECONDARY": "#000000",
-                "BlackHEADER_SECONDARY": "#FFFFFF",
-                "WhiteINTERACTIVE_ACTIVE": "#000000",
-                "BlackINTERACTIVE_ACTIVE": "#FFFFFF",
-                "WhiteINTERACTIVE_MUTED": "#000000",
-                "BlackINTERACTIVE_MUTED": "#FFFFFF",
-                "WhiteINTERACTIVE_NORMAL": "#000000",
-                "BlackINTERACTIVE_NORMAL": "#FFFFFF",
-                "WhiteTEXT_LINK": "#000000",
-                "BlackTEXT_LINK": "#FFFFFF",
-                "WhiteTEXT_MUTED": "#000000",
-                "BlackTEXT_MUTED": "#FFFFFF",
-                "WhiteTEXT_NORMAL": "#000000",
-                "BlackTEXT_NORMAL": "#FFFFFF",
-                "PRIMARY_DARK": "#FFFFFF",
-                "PRIMARY_DARK_100": "#FFFFFF",
-                "PRIMARY_DARK_300": "#FFFFFF",
-                "PRIMARY_DARK_360": "#FFFFFF",
-                "PRIMARY_DARK_400": "#FFFFFF",
-                "PRIMARY_DARK_500": "#FFFFFF",
-                "PRIMARY_DARK_600": "#FFFFFF",
-                "PRIMARY_DARK_630": "#FFFFFF",
-                "PRIMARY_DARK_700": "#FFFFFF",
-                "PRIMARY_DARK_800": "#FFFFFF",
-                "BRAND_NEW": "#FFFFFF",
-                "WHITE": "#FFFFFF",
-                "unsafeCHAT_GREY": "#000000"
-            };
+                <!-- Color -->
+                <h3>Colors</h3>
+                <div id="color"></div>
 
-            Object.keys(defaultColors).forEach(function(colorId) {
-                var colorInput = document.getElementById(colorId);
-                if (colorInput) {
-                    colorInput.value = defaultColors[colorId];
-                }
-            });
-        }
+                <!-- Unsafe Colors -->
+                <h3>Unsafe Colors</h3>
+                <label for="unsafeCHAT_GREY">unsafeCHAT_GREY:</label>
+                <input type="color" id="unsafeCHAT_GREY" name="unsafeCHAT_GREY"><br><br>
 
-        function generateColorInputs() {
-            var colorMap = [
-            "KEYBOARD",
-            "BACKGROUND_PRIMARY",
-            "BACKGROUND_SECONDARY",
-            "BACKGROUND_SECONDARY_ALT",
-            "BACKGROUND_TERTIARY",
-            "BACKGROUND_ACCENT",
-            "BACKGROUND_FLOATING",
-            "BACKGROUND_NESTED_FLOATING",
-            "BACKGROUND_MOBILE_PRIMARY",
-            "BACKGROUND_MOBILE_SECONDARY",
-            "BACKGROUND_MODIFIER_ACCENT",
-            "BACKGROUND_MODIFIER_ACTIVE",
-            "BACKGROUND_MODIFIER_SELECTED",
-            "CHANNELS_DEFAULT",
-            "HEADER_PRIMARY",
-            "HEADER_SECONDARY",
-            "INTERACTIVE_ACTIVE",
-            "INTERACTIVE_MUTED",
-            "INTERACTIVE_NORMAL",
-            "TEXT_LINK",
-            "TEXT_MUTED",
-            "TEXT_NORMAL"
-            ];
+                <button onclick="OldUIJSON()">Go</button>
+            </form>
+        </div>
 
-            var colorsContainer = document.getElementById("colorInputs");
+        <!-- New UI Editor -->
+        <div id="NewEditor" style="display: none;">
+            <h2>New UI</h2>
+            <form id="uiForm" onsubmit="return false;">
+                <h1>WIP</h1>
+            </form>
+        </div>
 
-            for (var key in colorMap) {
-                var colorLabel = document.createElement("label");
-                colorLabel.setAttribute("for", colorMap[key] + "White");
-                colorLabel.textContent = colorMap[key] + ":";
+    </body>
 
-                var whiteInput = document.createElement("input");
-                whiteInput.setAttribute("type", "color");
-                whiteInput.setAttribute("id", "White" + colorMap[key]);
-                whiteInput.setAttribute("name", "White" + colorMap[key]);
-
-                var blackInput = document.createElement("input");
-                blackInput.setAttribute("type", "color");
-                blackInput.setAttribute("id", "Black" + colorMap[key]);
-                blackInput.setAttribute("name", "Black" + colorMap[key]);
-
-                colorsContainer.appendChild(colorLabel);
-                colorsContainer.appendChild(whiteInput);
-                colorsContainer.appendChild(blackInput);
-                colorsContainer.appendChild(document.createElement("br"));
-                colorsContainer.appendChild(document.createElement("br"));
-            }
-            setDefaultColors();
-            Colors();
-        }
-
-
-        window.onload = generateColorInputs;
-    </script>
-</body>
 </html>
