@@ -45,71 +45,8 @@ function value(id) {
     }
 }
 
-
+// Downloads final theme
 function OldUIJSON() {
-    var jsonData = {
-        "name": value("name"),
-        "author": value("author"),
-        "version": value("version"),
-        "description": value("description"),
-        "authors": [ 
-            {
-                "name": value("name"),
-                "id": value("id")
-            }
-        ],
-        "background": {
-            "blur": value("blur"),
-            "url": value("url"),
-            "alpha": value("alpha")
-        },
-        "theme_color_map": {
-            "KEYBOARD": [value("WhiteKEYBOARD"), value("BlackKEYBOARD")],
-            "CHAT_GREY": [value("WhiteCHAT_GREY"), value("BlackCHAT_GREY")],
-            "BACKGROUND_SECONDARY": [value("WhiteBACKGROUND_SECONDARY"), value("BlackBACKGROUND_SECONDARY")],
-            "BACKGROUND_SECONDARY_ALT": [value("WhiteBACKGROUND_SECONDARY_ALT"), value("BlackBACKGROUND_SECONDARY_ALT")],
-            "BACKGROUND_TERTIARY": [value("WhiteBACKGROUND_TERTIARY"), value("BlackBACKGROUND_TERTIARY")],
-            "BACKGROUND_ACCENT": [value("WhiteBACKGROUND_ACCENT"), value("BlackBACKGROUND_ACCENT")],
-            "BACKGROUND_FLOATING": [value("WhiteBACKGROUND_FLOATING"), value("BlackBACKGROUND_FLOATING")],
-            "BACKGROUND_NESTED_FLOATING": [value("WhiteBACKGROUND_NESTED_FLOATING"), value("BlackBACKGROUND_NESTED_FLOATING")],
-            "BACKGROUND_MOBILE_PRIMARY": [value("WhiteBACKGROUND_MOBILE_PRIMARY"), value("BlackBACKGROUND_MOBILE_PRIMARY")],
-            "BACKGROUND_MOBILE_SECONDARY": [value("WhiteBACKGROUND_MOBILE_SECONDARY"), value("BlackBACKGROUND_MOBILE_SECONDARY")],
-            "BACKGROUND_MODIFIER_ACCENT": [value("WhiteBACKGROUND_MODIFIER_ACCENT"), value("BlackBACKGROUND_MODIFIER_ACCENT")],
-            "BACKGROUND_MODIFIER_ACTIVE": [value("WhiteBACKGROUND_MODIFIER_ACTIVE"), value("BlackBACKGROUND_MODIFIER_ACTIVE")],
-            "BACKGROUND_MODIFIER_SELECTED": [value("WhiteBACKGROUND_MODIFIER_SELECTED"), value("BlackBACKGROUND_MODIFIER_SELECTED")],
-            "CHANNELS_DEFAULT": [value("WhiteCHANNELS_DEFAULT"), value("BlackCHANNELS_DEFAULT")],
-            "HEADER_PRIMARY": [value("WhiteHEADER_PRIMARY"), value("BlackHEADER_PRIMARY")],
-            "HEADER_SECONDARY": [value("WhiteHEADER_SECONDARY"), value("BlackHEADER_SECONDARY")],
-            "INTERACTIVE_ACTIVE": [value("WhiteINTERACTIVE_ACTIVE"), value("BlackINTERACTIVE_ACTIVE")],
-            "INTERACTIVE_MUTED": [value("WhiteINTERACTIVE_MUTED"), value("BlackINTERACTIVE_MUTED")],
-            "INTERACTIVE_NORMAL": [value("WhiteINTERACTIVE_NORMAL"), value("BlackINTERACTIVE_NORMAL")],
-            "TEXT_LINK": [value("WhiteTEXT_LINK"), value("BlackTEXT_LINK")],
-            "TEXT_MUTED": [value("WhiteTEXT_MUTED"), value("BlackTEXT_MUTED")],
-            "TEXT_NORMAL": [value("WhiteTEXT_NORMAL"), value("BlackTEXT_NORMAL")]
-        },
-        "colours": {
-            "PRIMARY_DARK": value("PRIMARY_DARK"),
-            "PRIMARY_DARK_100": value("PRIMARY_DARK_100"),
-            "PRIMARY_DARK_300": value("PRIMARY_DARK_300"),
-            "PRIMARY_DARK_360": value("PRIMARY_DARK_360"),
-            "PRIMARY_DARK_400": value("PRIMARY_DARK_400"),
-            "PRIMARY_DARK_500": value("PRIMARY_DARK_500"),
-            "PRIMARY_DARK_600": value("PRIMARY_DARK_600"),
-            "PRIMARY_DARK_630": value("PRIMARY_DARK_630"),
-            "PRIMARY_DARK_700": value("PRIMARY_DARK_700"),
-            "PRIMARY_DARK_800": value("PRIMARY_DARK_800"),
-            "BRAND_NEW": value("BRAND_NEW"),
-            "WHITE": value("WHITE")
-        },
-        "unsafe_colors": {
-            "CHAT_GREY": value("unsafeCHAT_GREY")
-        }
-    };
-
-    downloadJSOFile(generateJsonData(), 'Theme.json');
-}
-
-function generateJsonData() {
     var jsonData = {
         "name": value("name"),
         "author": value("author"),
@@ -144,7 +81,7 @@ function generateJsonData() {
         jsonData.unsafe_colors[item] = value("UNSAFE_" + item);
     });
 
-    return jsonData;
+    downloadJSOFile(jsonData, 'Theme.json');
 }
 
 // Download json data "data" with name "Name" 
