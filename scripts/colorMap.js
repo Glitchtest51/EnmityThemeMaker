@@ -120,131 +120,12 @@ function downloadJSOFile(JSON, Name) {
     URL.revokeObjectURL(url);
 }
 
-
-// function setDefaultColors() {
-//     var defaultColors = {
-//         "version": "1.0.0",
-//         "WhiteKEYBOARD": "#000000",
-//         "BlackKEYBOARD": "#FFFFFF",
-//         "WhiteBACKGROUND_PRIMARY": "#000000",
-//         "BlackBACKGROUND_PRIMARY": "#FFFFFF",
-//         "WhiteBACKGROUND_SECONDARY": "#000000",
-//         "BlackBACKGROUND_SECONDARY": "#FFFFFF",
-//         "WhiteBACKGROUND_SECONDARY_ALT": "#000000",
-//         "BlackBACKGROUND_SECONDARY_ALT": "#FFFFFF",
-//         "WhiteBACKGROUND_TERTIARY": "#000000",
-//         "BlackBACKGROUND_TERTIARY": "#FFFFFF",
-//         "WhiteBACKGROUND_ACCENT": "#000000",
-//         "BlackBACKGROUND_ACCENT": "#FFFFFF",
-//         "WhiteBACKGROUND_FLOATING": "#000000",
-//         "BlackBACKGROUND_FLOATING": "#FFFFFF",
-//         "WhiteBACKGROUND_NESTED_FLOATING": "#000000",
-//         "BlackBACKGROUND_NESTED_FLOATING": "#FFFFFF",
-//         "WhiteBACKGROUND_MOBILE_PRIMARY": "#000000",
-//         "BlackBACKGROUND_MOBILE_PRIMARY": "#FFFFFF",
-//         "WhiteBACKGROUND_MOBILE_SECONDARY": "#000000",
-//         "BlackBACKGROUND_MOBILE_SECONDARY": "#FFFFFF",
-//         "WhiteBACKGROUND_MODIFIER_ACCENT": "#000000",
-//         "BlackBACKGROUND_MODIFIER_ACCENT": "#FFFFFF",
-//         "WhiteBACKGROUND_MODIFIER_ACTIVE": "#000000",
-//         "BlackBACKGROUND_MODIFIER_ACTIVE": "#FFFFFF",
-//         "WhiteBACKGROUND_MODIFIER_SELECTED": "#000000",
-//         "BlackBACKGROUND_MODIFIER_SELECTED": "#FFFFFF",
-//         "WhiteCHANNELS_DEFAULT": "#000000",
-//         "BlackCHANNELS_DEFAULT": "#FFFFFF",
-//         "WhiteHEADER_PRIMARY": "#000000",
-//         "BlackHEADER_PRIMARY": "#FFFFFF",
-//         "WhiteHEADER_SECONDARY": "#000000",
-//         "BlackHEADER_SECONDARY": "#FFFFFF",
-//         "WhiteINTERACTIVE_ACTIVE": "#000000",
-//         "BlackINTERACTIVE_ACTIVE": "#FFFFFF",
-//         "WhiteINTERACTIVE_MUTED": "#000000",
-//         "BlackINTERACTIVE_MUTED": "#FFFFFF",
-//         "WhiteINTERACTIVE_NORMAL": "#000000",
-//         "BlackINTERACTIVE_NORMAL": "#FFFFFF",
-//         "WhiteTEXT_LINK": "#000000",
-//         "BlackTEXT_LINK": "#FFFFFF",
-//         "WhiteTEXT_MUTED": "#000000",
-//         "BlackTEXT_MUTED": "#FFFFFF",
-//         "WhiteTEXT_NORMAL": "#000000",
-//         "BlackTEXT_NORMAL": "#FFFFFF",
-//         "PRIMARY_DARK": "#FFFFFF",
-//         "PRIMARY_DARK_100": "#FFFFFF",
-//         "PRIMARY_DARK_300": "#FFFFFF",
-//         "PRIMARY_DARK_360": "#FFFFFF",
-//         "PRIMARY_DARK_400": "#FFFFFF",
-//         "PRIMARY_DARK_500": "#FFFFFF",
-//         "PRIMARY_DARK_600": "#FFFFFF",
-//         "PRIMARY_DARK_630": "#FFFFFF",
-//         "PRIMARY_DARK_700": "#FFFFFF",
-//         "PRIMARY_DARK_800": "#FFFFFF",
-//         "BRAND_NEW": "#FFFFFF",
-//         "WHITE": "#FFFFFF",
-//         "unsafeCHAT_GREY": "#000000"
-//     };
-
-//     Object.keys(defaultColors).forEach(function(colorId) {
-//         var colorInput = document.getElementById(colorId);
-//         if (colorInput) {
-//             colorInput.value = defaultColors[colorId];
-//         }
-//     });
-// }
-
 // Generates the input values
 function generateColorInputs() {
-    var main = [
-        "name",
-        "author",
-        "id",
-        "version",
-        "description",
-        "blur",
-        "url",
-        "alpha"
-    ];
-    var colorMap = [
-        "KEYBOARD",
-        "BACKGROUND_PRIMARY",
-        "BACKGROUND_SECONDARY",
-        "BACKGROUND_SECONDARY_ALT",
-        "BACKGROUND_TERTIARY",
-        "BACKGROUND_ACCENT",
-        "BACKGROUND_FLOATING",
-        "BACKGROUND_NESTED_FLOATING",
-        "BACKGROUND_MOBILE_PRIMARY",
-        "BACKGROUND_MOBILE_SECONDARY",
-        "BACKGROUND_MODIFIER_ACCENT",
-        "BACKGROUND_MODIFIER_ACTIVE",
-        "BACKGROUND_MODIFIER_SELECTED",
-        "CHANNELS_DEFAULT",
-        "HEADER_PRIMARY",
-        "HEADER_SECONDARY",
-        "INTERACTIVE_ACTIVE",
-        "INTERACTIVE_MUTED",
-        "INTERACTIVE_NORMAL",
-        "TEXT_LINK",
-        "TEXT_MUTED",
-        "TEXT_NORMAL"
-    ];
-    var color = [
-        "PRIMARY_DARK",
-        "PRIMARY_DARK_100",
-        "PRIMARY_DARK_300",
-        "PRIMARY_DARK_360",
-        "PRIMARY_DARK_400",
-        "PRIMARY_DARK_500",
-        "PRIMARY_DARK_600",
-        "PRIMARY_DARK_630",
-        "PRIMARY_DARK_700",
-        "PRIMARY_DARK_800",
-        "BRAND_NEW",
-        "WHITE"
-    ];
-
     var maindiv = document.getElementById("main");
     var colorMapdiv = document.getElementById("ColorMaps");
     var colordiv = document.getElementById("color");
+    var unsafecolordiv = document.getElementById("unsafecolor");
 
     for (var key in main) {
         var textLabel = document.createElement("label");
@@ -300,12 +181,79 @@ function generateColorInputs() {
         colordiv.appendChild(document.createElement("br"));
     }
 
+    for (var key in Unsafe_color) {
+        var colorLabel = document.createElement("label");
+        colorLabel.setAttribute("for", "UNSAFE_" + Unsafe_color[key]);
+        colorLabel.textContent = "UNSAFE_" + Unsafe_color[key] + ":";
+
+        var colorInput = document.createElement("input");
+        colorInput.setAttribute("type", "color");
+        colorInput.setAttribute("id", "UNSAFE_" + Unsafe_color[key]);
+        colorInput.setAttribute("name", "UNSAFE_" + Unsafe_color[key]);
+
+        unsafecolordiv.appendChild(colorLabel);
+        unsafecolordiv.appendChild(colorInput);
+        unsafecolordiv.appendChild(document.createElement("br"));
+        unsafecolordiv.appendChild(document.createElement("br"));
+    }
+
     setDefaultColors();
     Colors();
 }
 
 // Vars
 var originalColors = {};
+var main = [
+    "name",
+    "author",
+    "id",
+    "version",
+    "description",
+    "blur",
+    "url",
+    "alpha"
+];
+var colorMap = [
+    "KEYBOARD",
+    "BACKGROUND_PRIMARY",
+    "BACKGROUND_SECONDARY",
+    "BACKGROUND_SECONDARY_ALT",
+    "BACKGROUND_TERTIARY",
+    "BACKGROUND_ACCENT",
+    "BACKGROUND_FLOATING",
+    "BACKGROUND_NESTED_FLOATING",
+    "BACKGROUND_MOBILE_PRIMARY",
+    "BACKGROUND_MOBILE_SECONDARY",
+    "BACKGROUND_MODIFIER_ACCENT",
+    "BACKGROUND_MODIFIER_ACTIVE",
+    "BACKGROUND_MODIFIER_SELECTED",
+    "CHANNELS_DEFAULT",
+    "HEADER_PRIMARY",
+    "HEADER_SECONDARY",
+    "INTERACTIVE_ACTIVE",
+    "INTERACTIVE_MUTED",
+    "INTERACTIVE_NORMAL",
+    "TEXT_LINK",
+    "TEXT_MUTED",
+    "TEXT_NORMAL"
+];
+var color = [
+    "PRIMARY_DARK",
+    "PRIMARY_DARK_100",
+    "PRIMARY_DARK_300",
+    "PRIMARY_DARK_360",
+    "PRIMARY_DARK_400",
+    "PRIMARY_DARK_500",
+    "PRIMARY_DARK_600",
+    "PRIMARY_DARK_630",
+    "PRIMARY_DARK_700",
+    "PRIMARY_DARK_800",
+    "BRAND_NEW",
+    "WHITE"
+];
+var Unsafe_color = [
+    "CHAT_GREY"
+];
 
 // Onload
 window.onload = generateColorInputs;
