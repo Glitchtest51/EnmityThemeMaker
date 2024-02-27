@@ -32,7 +32,7 @@ function NewUIJSON() {
     });
 
     // Generate unsafe_colors
-    unsafe_color.forEach(function (item) {
+    unsafe_colors.forEach(function (item) {
         jsonData.unsafe_colors[item] = value('new' + "UNSAFE_" + item);
     });
 
@@ -121,9 +121,9 @@ var rawColors = [
     "WHITE_500",
     "WHITE_630"
 ];
-var unsafe_color = [
+var unsafe_colors = [
     "CHAT_GREY"
 ];
 
 // Onload
-window.onload = generateMaps(main, semanticColors, rawColors, unsafe_color, 'new');
+window.onload = generateMaps(main, semanticColors, rawColors, unsafe_colors, 'new');
