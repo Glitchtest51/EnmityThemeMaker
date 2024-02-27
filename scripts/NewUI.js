@@ -4,30 +4,30 @@
 function NewUIJSON() {
     var jsonData = {
         "name": value('new' + "name"),
-        "author": value('new' + "author"),
-        "version": value('new' + "version"),
         "description": value('new' + "description"),
-        "authors": [{
-            "name": value('new' + "author"),
-            "id": value('new' + "id")
-        }],
+        "spec": value('new' + "spec"),
+        "authors": [
+            {
+                "name": value('new' + "author"),
+                "id": value('new' + "id")
+            }
+        ],
+        "semanticColors": {},
+        "rawColors": {},
         "background": {
-            "blur": value('new' + "blur"),
-            "url": value('new' + "url"),
-            "alpha": value('new' + "alpha")
-        },
-        "theme_color_map": {},
-        "colours": {},
-        "unsafe_colors": {}
-    };
+          "blur": value('new' + "blur"),
+          "url": value('new' + "url"),
+          "alpha": value('new' + "alpha")
+        }
+      };
 
-    // Generate theme_color_map
-    colorMap.forEach(function (item) {
-        jsonData.theme_color_map[item] = [value('new' + "White" + item), value('new' + "Black" + item)];
+    // Generate semanticColors
+    semanticColors.forEach(function (item) {
+        jsonData.semanticColors[item] = [value('new' + "White" + item), value('new' + "Black" + item)];
     });
 
-    // Generate colours
-    color.forEach(function (item) {
+    // Generate rawColors
+    rawColors.forEach(function (item) {
         jsonData.colours[item] = value('new' + item);
     });
 
@@ -45,37 +45,47 @@ var main = [
     "name",
     "author",
     "id",
-    "version",
+    "spec",
     "description",
     "blur",
     "url",
     "alpha"
 ];
-var colorMap = [
-    "KEYBOARD",
+var semanticColors = [
+    "HEADER_PRIMARY",
+    "HEADER_SECONDARY",
+    "TEXT_NORMAL",
+    "TEXT_MUTED",
+    "TEXT_LINK",
+    "INTERACTIVE_NORMAL",
+    "INTERACTIVE_HOVER",
+    "INTERACTIVE_ACTIVE",
+    "INTERACTIVE_MUTED",
     "BACKGROUND_PRIMARY",
     "BACKGROUND_SECONDARY",
     "BACKGROUND_SECONDARY_ALT",
     "BACKGROUND_TERTIARY",
     "BACKGROUND_ACCENT",
-    "BACKGROUND_FLOATING",
-    "BACKGROUND_NESTED_FLOATING",
     "BACKGROUND_MOBILE_PRIMARY",
     "BACKGROUND_MOBILE_SECONDARY",
-    "BACKGROUND_MODIFIER_ACCENT",
+    "BACKGROUND_MESSAGE_HOVER",
+    "BACKGROUND_MODIFIER_HOVER",
     "BACKGROUND_MODIFIER_ACTIVE",
     "BACKGROUND_MODIFIER_SELECTED",
-    "CHANNELS_DEFAULT",
-    "HEADER_PRIMARY",
-    "HEADER_SECONDARY",
-    "INTERACTIVE_ACTIVE",
-    "INTERACTIVE_MUTED",
-    "INTERACTIVE_NORMAL",
-    "TEXT_LINK",
-    "TEXT_MUTED",
-    "TEXT_NORMAL"
+    "BACKGROUND_MODIFIER_ACCENT",
+    "BG_BACKDROP",
+    "BG_BASE_PRIMARY",
+    "BG_BASE_SECONDARY",
+    "CARD_PRIMARY_BG",
+    "CHANNEL_ICON",
+    "CHAT_BACKGROUND",
+    "CHANNEL_TEXT_AREA_PLACEHOLDER",
+    "TEXT_DANGER",
+    "REDESIGN_BUTTON_SECONDARY_BACKGROUND",
+    "REDESIGN_BUTTON_SECONDARY_ALT_BACKGROUND",
+    "SPOILER_HIDDEN_BACKGROUND"
 ];
-var color = [
+var rawColors = [
     "PRIMARY_DARK",
     "PRIMARY_DARK_100",
     "PRIMARY_DARK_300",
@@ -94,4 +104,4 @@ var unsafe_color = [
 ];
 
 // Onload
-window.onload = generateMaps(main, colorMap, color, unsafe_color, 'new');
+window.onload = generateMaps(main, semanticColors, rawColors, unsafe_color, 'new');

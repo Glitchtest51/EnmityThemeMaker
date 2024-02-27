@@ -4,7 +4,6 @@
 function OldUIJSON() {
     var jsonData = {
         "name": value('old' + "name"),
-        "author": value('old' + "author"),
         "version": value('old' + "version"),
         "description": value('old' + "description"),
         "authors": [{
@@ -22,17 +21,17 @@ function OldUIJSON() {
     };
 
     // Generate theme_color_map
-    colorMap.forEach(function (item) {
+    theme_color_map.forEach(function (item) {
         jsonData.theme_color_map[item] = [value('old' + "White" + item), value('old' + "Black" + item)];
     });
 
-    // Generate colours
-    color.forEach(function (item) {
+    // Generate rawColors
+    rawColors.forEach(function (item) {
         jsonData.colours[item] = value('old' + item);
     });
 
     // Generate unsafe_colors
-    unsafe_color.forEach(function (item) {
+    unsafe_colors.forEach(function (item) {
         jsonData.unsafe_colors[item] = value('old' + "UNSAFE_" + item);
     });
 
@@ -51,7 +50,7 @@ var main = [
     "url",
     "alpha"
 ];
-var colorMap = [
+var theme_color_map = [
     "KEYBOARD",
     "BACKGROUND_PRIMARY",
     "BACKGROUND_SECONDARY",
@@ -75,23 +74,45 @@ var colorMap = [
     "TEXT_MUTED",
     "TEXT_NORMAL"
 ];
-var color = [
-    "PRIMARY_DARK",
-    "PRIMARY_DARK_100",
-    "PRIMARY_DARK_300",
-    "PRIMARY_DARK_360",
-    "PRIMARY_DARK_400",
-    "PRIMARY_DARK_500",
-    "PRIMARY_DARK_600",
-    "PRIMARY_DARK_630",
-    "PRIMARY_DARK_700",
-    "PRIMARY_DARK_800",
-    "BRAND_NEW",
-    "WHITE"
+var rawColors = [
+    "BLACK_500",
+    "BRAND_260",
+    "BRAND_500",
+    "BRAND_560",
+    "PRIMARY_100",
+    "PRIMARY_130",
+    "PRIMARY_160",
+    "PRIMARY_200",
+    "PRIMARY_230",
+    "PRIMARY_300",
+    "PRIMARY_360",
+    "PRIMARY_400",
+    "PRIMARY_460",
+    "PRIMARY_500",
+    "PRIMARY_560",
+    "PRIMARY_630",
+    "PRIMARY_645",
+    "PRIMARY_660",
+    "PRIMARY_700",
+    "PRIMARY_800",
+    "PLUM_1",
+    "PLUM_3",
+    "PLUM_6",
+    "PLUM_9",
+    "PLUM_10",
+    "PLUM_11",
+    "PLUM_13",
+    "PLUM_17",
+    "PLUM_18",
+    "PLUM_19",
+    "PLUM_20",
+    "PLUM_22",
+    "WHITE_500",
+    "WHITE_630"
 ];
-var unsafe_color = [
+var unsafe_colors = [
     "CHAT_GREY"
 ];
 
 // Onload
-window.onload = generateMaps(main, colorMap, color, unsafe_color, 'old');
+window.onload = generateMaps(main, theme_color_map, rawColors, unsafe_colors, 'old');
