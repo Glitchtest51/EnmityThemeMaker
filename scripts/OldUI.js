@@ -25,7 +25,7 @@ function OldUIJSON() {
         jsonData.theme_color_map[item] = [value('old' + "White" + item), value('old' + "Black" + item)];
     });
 
-    // Generate colours
+    // Generate rawColors
     rawColors.forEach(function (item) {
         jsonData.colours[item] = value('old' + item);
     });
@@ -93,4 +93,4 @@ var unsafe_colors = [
 ];
 
 // Onload
-window.onload = generateMaps(main, colorMap, rawColors, unsafe_colors, 'old');
+window.onload = generateMaps(main, theme_color_map, rawColors, unsafe_colors, 'old');
