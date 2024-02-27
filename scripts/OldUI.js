@@ -8,7 +8,7 @@ function OldUIJSON() {
         "version": value("version"),
         "description": value("description"),
         "authors": [{
-            "name": value("name"),
+            "name": value("author"),
             "id": value("id")
         }],
         "background": {
