@@ -57,9 +57,13 @@ function downloadJSONFile(data, Name) {
 // Generates the input values
 function generateMaps(main, colorMap, color, unsafe_color, type) {
     var maindiv = document.getElementById(type + "main");
-    var colorMapdiv = document.getElementById(type + "ColorMaps");
-    var colordiv = document.getElementById(type + "color");
-    var unsafe_colordiv = document.getElementById(type + "unsafecolor");
+    if (type == 'new') {
+        var colorMapdiv = document.getElementById(type + "semanticColors");
+    } else {
+        var colorMapdiv = document.getElementById(type + "theme_color_map");
+    }
+    var colordiv = document.getElementById(type + "rawColors");
+    var unsafe_colordiv = document.getElementById(type + "unsafe_colors");
 
     for (var key in main) {
         var textLabel = document.createElement("label");
