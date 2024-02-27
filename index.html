@@ -22,7 +22,7 @@
         <div id="OldEditor">
 
             <!-- Script -->
-            <script src="scripts/OldUI.js"></script>
+            <script src="scripts/OldUI.js" defer></script>
 
             <h2>Old UI</h2>
             <form id="uiForm" onsubmit="return false;">
@@ -32,19 +32,19 @@
                 <input type="checkbox" id="HexBox" name="HexBox" onchange="hexBox()"><br><br>
 
                 <!-- Main Theme Data -->
-                <div id="main"></div>
+                <div id="oldmain"></div>
                 
                 <!-- Color Maps -->
                 <h3>Color Map (First is dark mode and second is light mode)</h3>
-                <div id="ColorMaps"></div>
+                <div id="oldColorMaps"></div>
 
                 <!-- Color -->
                 <h3>Colors</h3>
-                <div id="color"></div>
+                <div id="oldcolor"></div>
 
                 <!-- Unsafe Colors -->
                 <h3>Unsafe Colors</h3>
-                <div id="unsafecolor"></div>
+                <div id="oldunsafecolor"></div>
 
                 <button onclick="OldUIJSON()">Go</button>
             </form>
@@ -55,11 +55,30 @@
         <div id="NewEditor" style="display: none;">
 
             <!-- Script -->
-            <script src="scripts/OldUI.js"></script>
+            <script src="scripts/NewUI.js" defer></script>
 
             <h2>New UI</h2>
             <form id="uiForm" onsubmit="return false;">
-                <h1>WIP</h1>
+                <!-- Colot input text field or color picker -->
+                <label for="HexBox">Hex:</label>
+                <input type="checkbox" id="HexBox" name="HexBox" onchange="hexBox()"><br><br>
+
+                <!-- Main Theme Data -->
+                <div id="newmain"></div>
+                
+                <!-- Color Maps -->
+                <h3>Color Map (First is dark mode and second is light mode)</h3>
+                <div id="newColorMaps"></div>
+
+                <!-- Color -->
+                <h3>Colors</h3>
+                <div id="newcolor"></div>
+
+                <!-- Unsafe Colors -->
+                <h3>Unsafe Colors</h3>
+                <div id="newunsafecolor"></div>
+
+                <button onclick="NewUIJSON()">Go</button>
             </form>
 
         </div>

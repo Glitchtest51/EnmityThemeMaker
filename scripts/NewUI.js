@@ -1,20 +1,20 @@
 // Functions 
 
 // Downloads final theme
-function OldUIJSON() {
+function NewUIJSON() {
     var jsonData = {
-        "name": value('old' + "name"),
-        "author": value('old' + "author"),
-        "version": value('old' + "version"),
-        "description": value('old' + "description"),
+        "name": value('new' + "name"),
+        "author": value('new' + "author"),
+        "version": value('new' + "version"),
+        "description": value('new' + "description"),
         "authors": [{
-            "name": value('old' + "author"),
-            "id": value('old' + "id")
+            "name": value('new' + "author"),
+            "id": value('new' + "id")
         }],
         "background": {
-            "blur": value('old' + "blur"),
-            "url": value('old' + "url"),
-            "alpha": value('old' + "alpha")
+            "blur": value('new' + "blur"),
+            "url": value('new' + "url"),
+            "alpha": value('new' + "alpha")
         },
         "theme_color_map": {},
         "colours": {},
@@ -23,17 +23,17 @@ function OldUIJSON() {
 
     // Generate theme_color_map
     colorMap.forEach(function (item) {
-        jsonData.theme_color_map[item] = [value('old' + "White" + item), value('old' + "Black" + item)];
+        jsonData.theme_color_map[item] = [value('new' + "White" + item), value('new' + "Black" + item)];
     });
 
     // Generate colours
     color.forEach(function (item) {
-        jsonData.colours[item] = value('old' + item);
+        jsonData.colours[item] = value('new' + item);
     });
 
     // Generate unsafe_colors
     unsafe_color.forEach(function (item) {
-        jsonData.unsafe_colors[item] = value('old' + "UNSAFE_" + item);
+        jsonData.unsafe_colors[item] = value('new' + "UNSAFE_" + item);
     });
 
     downloadJSONFile(jsonData, 'Theme.json');
@@ -94,4 +94,4 @@ var unsafe_color = [
 ];
 
 // Onload
-window.onload = generateMaps(main, colorMap, color, unsafe_color, 'old');
+window.onload = generateMaps(main, colorMap, color, unsafe_color, 'new');

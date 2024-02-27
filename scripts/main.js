@@ -11,7 +11,7 @@ function showOldUI() {
 }
 
 // Fetchs OG color inputs for HexBox
-function Colors() {
+function saveColorInput() {
     document.querySelectorAll('input[type="color"]').forEach(function(input) {
         originalColors[input.id] = input.name;
     });
@@ -44,7 +44,7 @@ function value(id) {
 }
 
 // Download json data "data" with name "Name" 
-function downloadJSOFile(data, Name) {
+function downloadJSONFile(data, Name) {
     const link = document.createElement('a');
     link.href = URL.createObjectURL(new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' }));
     link.download = Name;
@@ -55,21 +55,21 @@ function downloadJSOFile(data, Name) {
 }
 
 // Generates the input values
-function generateColorInputs(main, colorMap, color, unsafe_color) {
-    var maindiv = document.getElementById("main");
-    var colorMapdiv = document.getElementById("ColorMaps");
-    var colordiv = document.getElementById("color");
-    var unsafecolordiv = document.getElementById("unsafecolor");
+function generateMaps(main, colorMap, color, unsafe_color, type) {
+    var maindiv = document.getElementById(type + "main");
+    var colorMapdiv = document.getElementById(type + "ColorMaps");
+    var colordiv = document.getElementById(type + "color");
+    var unsafe_colordiv = document.getElementById(type + "unsafecolor");
 
     for (var key in main) {
         var textLabel = document.createElement("label");
-        textLabel.setAttribute("for", main[key]);
+        textLabel.setAttribute("for", type + main[key]);
         textLabel.textContent = main[key] + ":";
 
         var text = document.createElement("input");
         text.setAttribute("type", "text");
-        text.setAttribute("id", main[key]);
-        text.setAttribute("name", main[key]);
+        text.setAttribute("id", type + main[key]);
+        text.setAttribute("name", type + main[key]);
 
         maindiv.appendChild(textLabel);
         maindiv.appendChild(text);
@@ -79,18 +79,18 @@ function generateColorInputs(main, colorMap, color, unsafe_color) {
 
     for (var key in colorMap) {
         var colorLabel = document.createElement("label");
-        colorLabel.setAttribute("for", "White" + colorMap[key]);
+        colorLabel.setAttribute("for", type + "White" + colorMap[key]);
         colorLabel.textContent = colorMap[key] + ":";
 
         var whiteInput = document.createElement("input");
         whiteInput.setAttribute("type", "color");
-        whiteInput.setAttribute("id", "White" + colorMap[key]);
-        whiteInput.setAttribute("name", "White" + colorMap[key]);
+        whiteInput.setAttribute("id", type + "White" + colorMap[key]);
+        whiteInput.setAttribute("name", type + "White" + colorMap[key]);
 
         var blackInput = document.createElement("input");
         blackInput.setAttribute("type", "color");
-        blackInput.setAttribute("id", "Black" + colorMap[key]);
-        blackInput.setAttribute("name", "Black" + colorMap[key]);
+        blackInput.setAttribute("id", type + "Black" + colorMap[key]);
+        blackInput.setAttribute("name", type + "Black" + colorMap[key]);
 
         colorMapdiv.appendChild(colorLabel);
         colorMapdiv.appendChild(whiteInput);
@@ -125,11 +125,11 @@ function generateColorInputs(main, colorMap, color, unsafe_color) {
         colorInput.setAttribute("id", "UNSAFE_" + unsafe_color[key]);
         colorInput.setAttribute("name", "UNSAFE_" + unsafe_color[key]);
 
-        unsafecolordiv.appendChild(colorLabel);
-        unsafecolordiv.appendChild(colorInput);
-        unsafecolordiv.appendChild(document.createElement("br"));
-        unsafecolordiv.appendChild(document.createElement("br"));
+        unsafe_colordiv.appendChild(colorLabel);
+        unsafe_colordiv.appendChild(colorInput);
+        unsafe_colordiv.appendChild(document.createElement("br"));
+        unsafe_colordiv.appendChild(document.createElement("br"));
     }
 
-    Colors();
+    saveColorInput();
 }
