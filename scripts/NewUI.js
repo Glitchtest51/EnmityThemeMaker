@@ -28,13 +28,13 @@ function NewUIJSON() {
 
     // Generate rawColors
     rawColors.forEach(function (item) {
-        jsonData.colours[item] = value('new' + item);
+        jsonData.rawColors[item] = value('new' + item);
     });
 
     // Generate unsafe_colors
-    unsafe_colors.forEach(function (item) {
-        jsonData.unsafe_colors[item] = value('new' + "UNSAFE_" + item);
-    });
+    // unsafe_colors.forEach(function (item) {
+    //     jsonData.rawColors[item] = value('new' + "UNSAFE_" + item);
+    // });
 
     downloadJSONFile(jsonData, 'Theme.json');
 }
