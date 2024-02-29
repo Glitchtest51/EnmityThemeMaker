@@ -51,7 +51,7 @@ function downloadJSONFile(data, Name) {
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
-    URL.revokeObjectURL(url);
+    URL.revokeObjectURL(link);
 }
 
 // Generates the input values
@@ -105,13 +105,13 @@ function generateMaps(main, colorMap, color, unsafe_color, type) {
 
     for (var key in color) {
         var colorLabel = document.createElement("label");
-        colorLabel.setAttribute("for", color[key]);
+        colorLabel.setAttribute("for", type + color[key]);
         colorLabel.textContent = color[key] + ":";
 
         var colorInput = document.createElement("input");
         colorInput.setAttribute("type", "color");
-        colorInput.setAttribute("id", color[key]);
-        colorInput.setAttribute("name", color[key]);
+        colorInput.setAttribute("id", type + color[key]);
+        colorInput.setAttribute("name", type + color[key]);
 
         colordiv.appendChild(colorLabel);
         colordiv.appendChild(colorInput);
@@ -121,13 +121,13 @@ function generateMaps(main, colorMap, color, unsafe_color, type) {
 
     for (var key in unsafe_color) {
         var colorLabel = document.createElement("label");
-        colorLabel.setAttribute("for", "UNSAFE_" + unsafe_color[key]);
+        colorLabel.setAttribute("for", type + "UNSAFE_" + unsafe_color[key]);
         colorLabel.textContent = "UNSAFE_" + unsafe_color[key] + ":";
 
         var colorInput = document.createElement("input");
         colorInput.setAttribute("type", "color");
-        colorInput.setAttribute("id", "UNSAFE_" + unsafe_color[key]);
-        colorInput.setAttribute("name", "UNSAFE_" + unsafe_color[key]);
+        colorInput.setAttribute("id", type + "UNSAFE_" + unsafe_color[key]);
+        colorInput.setAttribute("name", type + "UNSAFE_" + unsafe_color[key]);
 
         unsafe_colordiv.appendChild(colorLabel);
         unsafe_colordiv.appendChild(colorInput);
