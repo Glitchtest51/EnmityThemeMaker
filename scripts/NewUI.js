@@ -14,12 +14,15 @@ function NewUIJSON() {
         ],
         "semanticColors": {},
         "rawColors": {},
-        "background": {
-          "blur": value('new' + "blur"),
-          "url": value('new' + "url"),
-          "alpha": value('new' + "alpha")
-        }
       };
+
+    if (value('new' + "url") != "") {
+       jsonData["background"] = {
+            "blur": value('new' + "blur"),
+            "url": value('new' + "url"),
+            "alpha": value('new' + "alpha")
+        }
+    }
 
     // Generate semanticColors
     semanticColors.forEach(function (item) {
@@ -36,7 +39,7 @@ function NewUIJSON() {
     //     jsonData.rawColors[item] = value('new' + "UNSAFE_" + item);
     // });
 
-    downloadJSONFile(jsonData, 'Theme.json');
+    downloadJSONFile(jsonData, value('new' + "name") + '.json');
 }
 
 // Vars
