@@ -10,15 +10,18 @@ function OldUIJSON() {
             "name": value('old' + "author"),
             "id": value('old' + "id")
         }],
-        "background": {
-            "blur": value('old' + "blur"),
-            "url": value('old' + "url"),
-            "alpha": value('old' + "alpha")
-        },
         "theme_color_map": {},
         "colours": {},
         "unsafe_colors": {}
     };
+
+    if (value('old' + "url") != "") {
+       jsonData["background"] = {
+            "blur": value('old' + "blur"),
+            "url": value('old' + "url"),
+            "alpha": value('old' + "alpha")
+        },
+    }
 
     // Generate theme_color_map
     theme_color_map.forEach(function (item) {
@@ -35,7 +38,7 @@ function OldUIJSON() {
         jsonData.unsafe_colors[item] = value('old' + "UNSAFE_" + item);
     });
 
-    downloadJSONFile(jsonData, 'Theme.json');
+    downloadJSONFile(jsonData, value('old' + "name") + '.json');
 }
 
 // Vars
