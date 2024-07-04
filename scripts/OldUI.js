@@ -20,7 +20,7 @@ function OldUIJSON() {
             "blur": value('old' + "blur"),
             "url": value('old' + "url"),
             "alpha": value('old' + "alpha")
-        },
+        }
     }
 
     // Generate theme_color_map
